@@ -1,0 +1,16 @@
+{
+    "name": "zoostyle/shape",
+    "description": "app for groomers",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Alexander Pugin",
+            "email": "mail@xanderin.dev"
+        }
+    ],
+    "require": {}
+}
