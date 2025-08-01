@@ -1,0 +1,59 @@
+.header {
+    display: flex;
+    padding: .5em 1em .5em 0;
+    background-color: var(--burgundy-color);
+
+    & > div {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1em;
+    }
+
+    &-content {
+
+        & > div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1em;
+            margin-bottom: .75em;
+
+            & > div {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: .5em;
+            }
+        }
+
+        &__sign-and-phone > div {
+            font-size: var(--fs-s);
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    .header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 3;
+        padding: 0 1em 0 0;
+        height: 5em;
+
+        &-content > div {
+            margin-bottom: 0;
+        }
+    }
+    .header .nav-bar, div.header-content__sign-and-phone, .header .langs {display: none !important;}
+}
+
+@media (max-width: 560px) {
+    .header .basket-button {
+        padding: 0.25em;
+        font-size: 1em;
+        & > span:last-child {display: none;}
+    }
+}

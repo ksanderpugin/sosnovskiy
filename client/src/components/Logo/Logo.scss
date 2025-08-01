@@ -1,0 +1,19 @@
+.logo {
+    display: block;
+
+    &-icon {
+        height: 7em;
+        width: auto;
+    }
+}
+
+@media (max-width: 1023px) {
+    .logo-icon {height: 5.7em;}
+}
+
+@media (max-width: 767px) {
+    .logo-icon {
+        width: 100%;
+        max-height: 5em;
+    }
+}

@@ -1,12 +1,25 @@
-import './App.css'
+import { Route, Routes } from "react-router-dom";
+import { Footer, Header } from "./components";
+import { AboutUs, CheckOut, Contacts, NotFound404, Products, ShippingAndPayment } from "./screens";
+import "./App.scss";
 
-function App() {
+export const App = () => {
 
-  return (
-    <>
-      <h1>Sosnovskiy shop</h1>
-    </>
-  )
+    return (
+        <>
+            <Header />
+                <main>
+                    <Routes>
+                        <Route path="/:lang?" element={<Products />} />
+                        <Route path="/:lang?/catalog/:category" element={<Products />} />
+                        <Route path="/:lang?/about" element={<AboutUs />} />
+                        <Route path="/:lang?/shipping-info" element={<ShippingAndPayment />} />
+                        <Route path="/:lang?/contacts" element={<Contacts />} />
+                        <Route path="/:lang?/checkout" element={<CheckOut />} />
+                        <Route path="/*" element={<NotFound404 />} />
+                    </Routes>
+                </main>
+            <Footer />
+        </>
+    );
 }
-
-export default App

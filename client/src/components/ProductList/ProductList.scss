@@ -1,0 +1,31 @@
+.product-list {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25em;
+    padding: 1em;
+    height: 100%;
+    box-sizing: border-box;
+    overflow-y: auto;
+
+    &__preloader {
+        grid-column: 1 / 4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@media (max-width: 895px) {
+    .product-list {grid-template-columns: repeat(2, 1fr);}
+}
+
+@media (max-width: 767px) {
+    .product-list {
+        padding-top: 8em;
+    }
+}
+
+@media (max-width: 560px) {
+    .product-list {grid-template-columns: 1fr; padding-left: 2em; padding-right: 2em;}
+}

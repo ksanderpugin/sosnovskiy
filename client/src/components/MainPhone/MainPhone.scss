@@ -1,0 +1,9 @@
+.phone {
+    font-size: var(--fs-xl);
+    color: var(--header-color);
+    transition: color .3s;
+
+    &:hover {
+        color: white;
+    }
+}

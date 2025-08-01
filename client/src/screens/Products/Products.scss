@@ -1,0 +1,19 @@
+.products {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+}
+
+@media (max-width: 767px) {
+    .products {
+        position: relative;
+        transform: none;
+        left: auto;
+    }
+}

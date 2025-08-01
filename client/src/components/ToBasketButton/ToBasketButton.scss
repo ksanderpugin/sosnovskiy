@@ -1,0 +1,12 @@
+.to-basket {
+    margin: 1em 0;
+    padding: .5em 1em;
+    border: 1px solid var(--burgundy-color);
+    border-radius: 1.5em;
+    transition: color .3s, background-color .3s;
+
+    &:hover {
+        color: white;
+        background-color: var(--burgundy-color);
+    }
+}

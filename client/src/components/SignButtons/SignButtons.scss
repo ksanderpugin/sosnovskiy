@@ -1,0 +1,19 @@
+.sign-buttons {
+    padding-left: 2em;
+    background-image: url(/media/user.svg);
+    background-size: 1.25em 1.25em;
+    background-position: left center;
+    background-repeat: no-repeat;
+    line-height: 1.5em;
+    display: flex;
+    gap: 1em;
+
+    & > button {
+        color: var(--header-color);
+        transition: color .3s;
+
+        &:hover {
+            color: white;
+        }
+    }
+}

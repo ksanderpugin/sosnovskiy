@@ -1,0 +1,15 @@
+.nav-bar {
+    display: flex;
+    gap: .75em;
+    justify-content: space-between;
+
+    & > li {
+        color: var(--header-color);
+        transition: color .3s;
+        cursor: pointer;
+
+        &:hover {
+            color: white;
+        }
+    }
+}

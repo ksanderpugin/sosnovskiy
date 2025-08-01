@@ -1,0 +1,15 @@
+.langs {
+    display: flex;
+    gap: 1em;
+
+    & > li {
+        color: var(--header-color);
+        transition: color .3s;
+        font-size: var(--fs-s);
+
+        &:hover {
+            color: white;
+            text-decoration: underline;
+        }
+    }
+}
