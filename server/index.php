@@ -8,7 +8,7 @@ require __DIR__ . '/vendor/autoload.php';
 // echo "\n\n" . \App\Controllers\MainController::class . "\n\n";
 
 
-// use views\View;
+use App\Views\View;
 
 
 $route = $_GET['route'] ?? '';
@@ -40,7 +40,7 @@ try {
     $controller->$action(...$data);
 
 } catch (\Exception $e) {
-    //View::renderJSON(['ok' => false, 'error' => $e->getMessage()]);
-    exit(json_encode(['ok' => false, 'error' => $e->getMessage()]));
+    View::renderJSON(['ok' => false, 'error' => $e->getMessage()]);
+    // exit(json_encode(['ok' => false, 'error' => $e->getMessage()]));
 }
 //*/

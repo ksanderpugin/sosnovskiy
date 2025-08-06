@@ -1,0 +1,23 @@
+.about-us {
+    padding: 0 1em 1em 1em;
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    overflow-y: auto;
+    box-sizing: border-box;
+
+    & > p {
+        line-height: 1.5em;
+        margin-top: 1em;
+        text-indent: 2em;
+        text-align: justify;
+
+        & > img {
+            width: 40mm;
+            height: 40mm;
+            float: left;
+            border-radius: 20mm;
+            margin-right: 1em;
+        }
+    }
+}

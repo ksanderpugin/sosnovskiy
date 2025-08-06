@@ -6,5 +6,11 @@ export type ProductItemType = {
     nameUK: string;
     nameEN: string;
     nameRU: string;
+    ingredientsUK: string;
+    ingredientsEN: string;
+    ingredientsRU: string;
     packs: ProductPackType[];
+    cal: number;
+    fat: number;
+    protein: number;
 }

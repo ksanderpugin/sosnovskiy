@@ -13,4 +13,14 @@ class View {
         http_response_code($status);
         if (count($data) > 0) echo json_encode($data, JSON_UNESCAPED_UNICODE);
     }
+
+    public static function getHtml($templatePath): string {
+        $path = __DIR__ . '/Templates/' . $templatePath;
+        if (file_exists($path)) {
+            ob_start();
+            include $path;
+            return ob_get_clean();
+        }
+        return '';
+    }
 }

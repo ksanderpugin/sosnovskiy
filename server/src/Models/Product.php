@@ -12,6 +12,18 @@ class Product extends DatabaseModel {
     public array $photos, $packs;
     public bool $actual;
 
+    public static function getByIds(array $ids): array {
+        if (count($ids) < 1) return [];
+        $idsStr = implode(',', $ids);
+        $query = 'SELECT * FROM `' . static::getTableName() . '` WHERE `id` IN (' . $idsStr . ')';
+        $resultBD = Database::getInst()->execute($query);
+        $result = [];
+        foreach ($resultBD as $item) {
+            $result[] = static::createObjectFromDBArray($item);
+        }
+        return $result;
+    }
+
     public static function getActuals(
         string $category = "All", 
         array $settings = []): array {

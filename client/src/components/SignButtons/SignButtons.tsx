@@ -9,7 +9,7 @@ export const SignButtons = () => {
     return (
         <div className="sign-buttons">
             <button>{Words.login[lang]}</button>
-            <button>{Words.signup[lang]}</button>
+            {/* <button>{Words.signup[lang]}</button> */}
         </div>
     )
 }

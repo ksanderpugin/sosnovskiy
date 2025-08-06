@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Services\Database;
+use Exception;
 
 function strToCamelCase(string $string): string {
     return str_replace('_', '', ucwords($string, '_'));
@@ -23,7 +24,7 @@ abstract class DatabaseModel
         $this->bId = $id;
     }
 
-    public function save() {
+    public function save($withLock = true) {
         $query = ''; $params = []; $values = $this->getValues();
         $qu = []; $qi = [[],[]];
         
@@ -43,14 +44,14 @@ abstract class DatabaseModel
             $pf = function ($value) {return ":$value";};
             
             $query = 'INSERT INTO `' . static::getTableName() . '` (' . implode(', ', $qi[0]) . 
-                ') VALUES (' . implode(', ', $qi[1]) . ');';
+            ') VALUES (' . implode(', ', $qi[1]) . ');';
         }
-        
+
         try {
-            Database::getInst()->execute('LOCK TABLES `' . static::getTableName() . '` WRITE;');
+            if ($withLock) Database::getInst()->execute('LOCK TABLES `' . static::getTableName() . '` WRITE;');
             $result = Database::getInst()->execute($query, $params);
             if ($this->getId() == 0) $this->setId($result);
-            Database::getInst()->execute('UNLOCK TABLES');
+            if ($withLock) Database::getInst()->execute('UNLOCK TABLES');
         } catch (\Exception $ex) {
             $exData = json_decode($ex->getMessage());
             if ($exData->type == Database::DB_TABLE_NOT_EXISTS_EX) static::createTable();

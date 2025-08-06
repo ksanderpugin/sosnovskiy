@@ -10,3 +10,42 @@
         background-color: var(--burgundy-color);
     }
 }
+
+.in-basket {
+    margin: 1em 0;
+    border: 1px solid var(--burgundy-color);
+    border-radius: 1.5em;
+    display: flex;
+    gap: .5em;
+    align-items: center;
+    overflow: hidden;
+
+    & > span {
+        font-size: var(--fs-l);
+        padding: .15em .5em;
+        background-color: rgba(55,4,1,0.1);
+        cursor: pointer;
+        transition: background-color .3s, color .3s;
+
+        &:hover {
+            background-color: var(--burgundy-color);
+            color: white;
+        }
+
+        &:active {
+            background-color: var(--blink-color);
+        }
+
+        &:first-child {
+            border-right: 1px solid var(--burgundy-color);
+        }
+
+        &:last-child {
+            border-left: 1px solid var(--burgundy-color);
+        }
+    }
+
+    & > b {
+        font-size: var(--fs-s);
+    }
+}

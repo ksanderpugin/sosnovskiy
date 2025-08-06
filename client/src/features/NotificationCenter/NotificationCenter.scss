@@ -1,0 +1,32 @@
+.nc {
+    &-contenier {
+        position: fixed;
+        z-index: 100;
+        top: 0;
+        right: 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+    &-message {
+        margin: .5em;
+        max-width: calc(100vw - 4em);
+        padding: .5em .75em;
+        box-sizing: border-box;
+        color: white;
+        border-radius: 0.5em;
+        transition: opacity .3s;
+
+        &--message {
+            background-color: green;
+        }
+
+        &--error {
+            background-color: red;
+        }
+
+        &--warning {
+            background-color: yellow;
+        }
+    }
+}

@@ -1,0 +1,10 @@
+.order-list {
+    border-collapse: collapse;
+    margin: 0 auto;
+
+    &-summary {
+        text-align: center;
+        padding-top: .5em;
+        padding-bottom: 1.5em;
+    }
+}

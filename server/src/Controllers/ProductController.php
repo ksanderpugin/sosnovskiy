@@ -22,6 +22,21 @@ class ProductController {
         ]);
     }
 
+    public function getByIds() : void {
+        $ids = $_GET['ids'] ?? '';
+        if (strlen($ids) < 1) return;
+
+        $arrId = explode(',', $ids);
+        $posIds = [];
+        foreach ($arrId as $item) {
+            $posIds[] = (int) $item;
+        }
+        View::renderJSON([
+            'ok' => true,
+            'products' => Product::getByIds($posIds)
+        ]);
+    }
+
     public function showCategories(): void {
 
         View::renderJSON([

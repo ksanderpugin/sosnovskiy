@@ -1,73 +1,55 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useLang } from "../../hooks/useLang";
 import { ProductItem } from "../ProductItem/ProductItem";
-import type { ProductItemType } from "../../types/ProductItemType";
 import "./ProductList.scss";
 import { useParams } from "react-router-dom";
 import { Loader } from "../Loader/Loader";
+import { useDispatch, useSelector } from "react-redux";
+import type { AppDispatch, RootState } from "../../store/strore";
+import { fetchProductList, resetList } from "../../store/slices/productsSlice";
 
 export const ProductList = () => {
 
-    const [list, setList] = useState<ProductItemType[]>([]);
-    const [isLoading, setIsLoading] = useState(true);
+    const { list, status } = useSelector( (state: RootState) => state.products );
+    const dispatch = useDispatch<AppDispatch>();
     const lang = useLang() || 'uk';
     const { category } = useParams();
     const ref = useRef<HTMLDivElement>(null);
 
+    // use effect fo reset data and load new
     useEffect( () => {
-        setList([]);
-        setIsLoading(true);
-        const params = new URLSearchParams({
+        dispatch(resetList());
+        dispatch(fetchProductList({
             category: category || 'all',
             limit: '12'
-        });
-        fetch(`${import.meta.env.VITE_BASE_URL}products?${params}`)
-            .then( resp => resp.json() )
-            .then( data => {
-                if (data.ok) setList(data.products);
-                setIsLoading(false);
-            })
-            .catch( () => {
-                console.error('Error get products');
-            });
-    }, [category]);
+        }));
+    }, [category, dispatch]);
 
+
+    // use effect for adding scroll listener for page pagination
     useEffect( () => {
 
         if (!ref.current) return;
         if (list.length < 12) return;
-        let stopListener = false;
+
+        window.onscroll = null;
+        ref.current.onscroll = null;
+
+        if (status !== 'fulfilled') return;
+        
 
         const loadMore = () => {
-            stopListener = true;
+            if (status !== 'fulfilled') return;
             const offset = document.querySelectorAll('.product-item').length;
             if (offset < 12) return;
-            const params = new URLSearchParams({
+            dispatch(fetchProductList({
                 category: category || 'all',
                 limit: '6',
                 offset: offset.toString()
-            });
-            setIsLoading(true);
-            fetch(`${import.meta.env.VITE_BASE_URL}products?${params}`)
-                .then( resp => resp.json() )
-                .then( data => {
-                    if (data.ok) {
-                        if (data.products.length > 0) {
-                            setList([...list, ...data.products]);
-                            setTimeout(() => {
-                                stopListener = false;
-                            }, 1000);
-                        }
-                    }
-                    setIsLoading(false);
-                })
-                .catch( () => {
-                    console.error('Error get products');
-                });
+            }));
         }
 
         const scrollListener = () => {
-            if (stopListener) return;
             const el = document.querySelector('.product-item:last-child');
             if (el) {
                 if (el.getBoundingClientRect().top < document.documentElement.clientHeight) {
@@ -79,7 +61,7 @@ export const ProductList = () => {
         ref.current.onscroll = scrollListener;
         window.onscroll = scrollListener;
 
-    }, [category, list]);
+    }, [category, list, dispatch, status]);
 
     return (
         <div className="product-list" ref={ref}>
@@ -94,7 +76,7 @@ export const ProductList = () => {
                         price={item.packs[0].cost || 0} />
                 }
             )}
-            {isLoading && <div className="product-list__preloader"><Loader /></div>}
+            {status === 'pending' && <div className="product-list__preloader"><Loader /></div>}
         </div>
     );
 }
