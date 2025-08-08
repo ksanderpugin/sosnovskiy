@@ -17,7 +17,7 @@ const onClickHandler = (id: number) => {
 
 export const ShopMap = () => {
   return (
-    <LoadScript googleMapsApiKey="AIzaSyAiMj8LpcyUZKN1JuBTRV7d1tVgkcZcJC8">
+    <LoadScript googleMapsApiKey={`${import.meta.env.VITE_GOOGLEMAP_KEY}`}>
       <GoogleMap mapContainerClassName="contacts-info__map-contanier" center={center} zoom={11}>
         {shops.map( item => 
           <Marker 
